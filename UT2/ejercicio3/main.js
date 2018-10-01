@@ -1,22 +1,35 @@
 /**
- * Programa que lea un string introducido por el usuario.
- * Comprueba que solo contenga letras.
- * Cambia la primera letra a mayúscula y el resto a minúscula.
- * Le quita los espacios a principio y final de la cadena.
+ * Crear un script que permita abrir una nueva ventana. Dicha ventana deberá tener un ancho
+ * de 300 pixeles y una altura de 200 pixeles. La ventana se deberá desplazar de forma aleatoria
+ * un número finito de veces y finalmente se cerrará.
  */
 
-var text; // texto introducido por el usuario
-var regex = /^[a-zA-Z\s]*$/; // expresión regular que sólo admite letras (mayúsculas o minúsculas) y espacios.
+var ventana;
+var interval;
+var end = 0;
 
-text = prompt("Introduzca el texto");
-
-while (!regex.test(text) || text == " " || text == "") { // comprobación de string en bucle.
-    text = prompt("Error. Introduzca el texto");
+function randomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-text = cleanUp(text.trim()); // se llama a la función cleanUp y se añade el método trim para borrar los espacios al principio y final de la cadena.
-document.write(text);
+function abrir() {
+    if (ventana == undefined || ventana.closed) {
+        ventana = window.open("", "", "width=300,height=200");
+        ventana.document.write("<title>Ventana</title>");
+        interval = setInterval(move, 1000); // llama a la función move cada segundo.
+    }
 
-function cleanUp(string) {  // convierte la primera letra a mayúscula y la une al resto de la cadena convertida a minúscula.
-    return string.charAt(0).toUpperCase() + string.substr(1).toLowerCase();
+    else {
+        alert("La ventana ya está creada.")
+    }
+
+}
+
+function move() {
+    ventana.moveTo(randomNumber(1, 1500), randomNumber(1, 1500));  // mueve la ventana
+    ventana.focus();                                          // muestra la ventana
+    end++;
+    if (end == 10) { // número de veces que se hará el movimiento
+        clearInterval(interval);
+    }
 }

@@ -5,7 +5,6 @@ var color = "blue";
 
 function start() {
     interval=setInterval(changeColor,1000);
-    //interval=setTimeout(changeColor,1000);
 }
 
 function stop() {
