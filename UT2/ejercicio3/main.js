@@ -8,7 +8,7 @@ var ventana;
 var interval;
 var end = 0;
 
-function randomNumber(min, max) {
+function randomNumber(min, max) { // función que genera un número aleatorio entre los pasados por parámetro.
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
@@ -26,10 +26,11 @@ function abrir() {
 }
 
 function move() {
-    ventana.moveTo(randomNumber(1, 1500), randomNumber(1, 1500));  // mueve la ventana
-    ventana.focus();                                          // muestra la ventana
+    ventana.moveTo(randomNumber(1, 1500), randomNumber(1, 1500));  // mueve la ventana                                        // muestra la ventana
     end++;
-    if (end == 10) { // número de veces que se hará el movimiento
+    if (end > 10) { // número de veces que se hará el movimiento
         clearInterval(interval);
+        ventana.close();
+        end = 0;
     }
 }
